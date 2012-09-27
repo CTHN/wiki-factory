@@ -1,0 +1,58 @@
+== Importer ==
+
+Das aktuelle Wiki muss nach Markdown konvertiert werden. Hierzu müssen wir ein
+Transformer schreiben, der aus Raki-Syntax Markdown generiert.
+
+* Raki Syntax analysieren, vielleicht ist die Portierung ja garnicht so
+  schwer.
+
+  - Header sind mit !!! gemacht
+  - Plugin-Aufrufe müssen entweder umgebaut oder entfernt werden. Verwendet
+    wurden und wichtig für die Konvertierung:
+
+    \img width=xxx <image> \, \img position=left <image> \
+    \youtube <url> \
+    \red <warn-sign> \
+    \osm <lon> <lat> \
+
+    Kann gelöscht werden:
+
+    \index\, \index namespace=<namespace> \, \index namespace=<namespace> index-page=false \
+    \recentchanges type=all \
+
+    Die Plugins beginnen mit einem \ gefolgt von einem Keyword. Darauf folgen
+    Parameter und am ende ein \. Davor muss kein Leerzeichen sein, dieser ist
+    optional.
+
+* Prüfe ob es sinn macht die Datenbasis so zu belassen und den Parser, sowie
+  den HTML generator von Raki zu verwenden. In diesem Zuge müssen wir dann auch
+  verwendeten Plugins übernehmen. Geht das so einfach? ---> Macht keinen
+  Sinn da vieles sehr verbastelt ist. Man müsste zu viel übernehmen was das
+  Ganze wieder kompliziert macht.
+
+
+* Prüfen ob wir den Raki parser rausziehen können, um das einlesen über Raki zu
+  machen um dann daraus Markdown zu generieren.
+* Die Verzeichnisstruktur muss überdacht werden. Macht das sinn so wie das Wiki
+  momentan strukturiert ist? Kann man das so lassen oder müssen wir uns mit den
+  Bildern was anderes einfallen lassen?
+* Wenn manuelle Arbeiten notwendig sind, die aktuelle Seite an einem definierten
+  tag abschalten und die Migration ein Mal durchführen.
+
+
+== Parser/Generator der Wiki-Seiten ==
+
+* Lokale/Relative links zu anderen Seiten und zu Bildern
+
+== Neues Design muss gemacht werden ==
+
+HTML/CSS + Designkonzept
+
+
+== Plugin-Schnittstelle ==
+
+== Tools ==
+
+* Dead link checker
+
+* Bilder zurechtskalieren
