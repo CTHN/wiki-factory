@@ -1,3 +1,16 @@
+== Content ==
+
+Effektiv sind es 81 Seiten, die portiert werden müssen. Davon sind 15 Userseiten
+und 27 Protokolle. Der Rest muss neu strukturiert werden. Am besten wird zuerst
+der Inhalt nach Markdown konvertiert und danach aufgeräumt. Somit bekommt man
+auch diejenigen Fehler noch raus, die der Konverter nicht geschafft hat.
+
+(1) Alles nach Markdown konvertieren
+
+(1.1) Die verlinkten Dateien ordnen und sauber in den Dokumenten verlinken
+
+(2) Neu strukturieren und altes Zeug wegwerfen
+
 == Importer ==
 
 Das aktuelle Wiki muss nach Markdown konvertiert werden. Hierzu müssen wir ein
@@ -21,23 +34,26 @@ Transformer schreiben, der aus Raki-Syntax Markdown generiert.
     \recentchanges type=all \
 
     Die Plugins beginnen mit einem \ gefolgt von einem Keyword. Darauf folgen
-    Parameter und am ende ein \. Davor muss kein Leerzeichen sein, dieser ist
+    Parameter und am Ende ein \. Davor muss kein Leerzeichen sein, dieser ist
     optional.
 
-* Prüfe ob es sinn macht die Datenbasis so zu belassen und den Parser, sowie
+* Prüfe ob es Sinn macht die Datenbasis so zu belassen und den Parser, sowie
   den HTML generator von Raki zu verwenden. In diesem Zuge müssen wir dann auch
   verwendeten Plugins übernehmen. Geht das so einfach? ---> Macht keinen
   Sinn da vieles sehr verbastelt ist. Man müsste zu viel übernehmen was das
   Ganze wieder kompliziert macht.
 
-
 * Prüfen ob wir den Raki parser rausziehen können, um das einlesen über Raki zu
-  machen um dann daraus Markdown zu generieren.
-* Die Verzeichnisstruktur muss überdacht werden. Macht das sinn so wie das Wiki
+  machen um dann daraus Markdown zu generieren. --> Das macht so auch keinen
+  Sinn, da wir keine Plugins in Markdown haben. Ergo brauchen wir hier sowieso
+  eine Spezialbehandlung dafür.
+
+* Die Verzeichnisstruktur muss überdacht werden. Macht das Sinn so wie das Wiki
   momentan strukturiert ist? Kann man das so lassen oder müssen wir uns mit den
   Bildern was anderes einfallen lassen?
 * Wenn manuelle Arbeiten notwendig sind, die aktuelle Seite an einem definierten
-  tag abschalten und die Migration ein Mal durchführen.
+  tag abschalten und die Migration ein Mal durchführen. --> Nicht so kritisch,
+  da sowieso keiner mehr was am Content macht.
 
 
 == Parser/Generator der Wiki-Seiten ==
@@ -48,6 +64,17 @@ Transformer schreiben, der aus Raki-Syntax Markdown generiert.
 
 HTML/CSS + Designkonzept
 
+== Dateihandling ==
+
+Die Dateien (meist Bilder) die in den Seiten verlinkt sind, brauchen einen
+vernünftigen Platz. Ideensammlung:
+
+* Alle Dateien in einen "ressources" ordner ablegen. Darin könenn Unterordner
+  angelegt werden, auf diese dann auch verlinkt werden können. In diesen Ordner
+  kommen dann alle Dateien: Bilder, PDFs usw. Es wäre also unser Dropbox-Ersatz.
+
+* Jede Wikiseite bekommt seinenn eigenen Ordner. Nachteil: Es wird schnell
+  unübersichtlich.
 
 == Plugin-Schnittstelle ==
 
@@ -56,3 +83,4 @@ HTML/CSS + Designkonzept
 * Dead link checker
 
 * Bilder zurechtskalieren
+
