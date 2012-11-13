@@ -17,10 +17,33 @@ Dir.glob("#{basepath}/git_repo/**/*").each do |file|
 
   # Regular files are Raki style pages and need to convert to a markdown file
   if File.file?(file) and File.extname(file).empty?
-    content = File.read(file)
-    content.gsub!(/^!([^!].+)$/, /# $1 #/)
-    p content
+    content = File.read(file).force_encoding("ISO-8859-1").encode("UTF-8", :replace => nil)
 
+    # Headings
+    content.gsub!(/^!([^!].+)$/, "#\\1")
+    content.gsub!(/^!!([^!].+)$/, "##\\1")
+    content.gsub!(/^!!!([^!].+)$/, "###\\1")
+    content.gsub!(/^!!!!([^!].+)$/, "####\\1")
+    content.gsub!(/^!!!!!([^!].+)$/, "#####\\1")
+
+    # Links
+    content.gsub!(/\[([^|\]]+)\]/, "[\\1][\\1]")
+    content.gsub!(/\[([^|]+)\|([^\]]+)\]/, "[\\2][\\1]")
+
+    # Images
+    content.gsub!(/\\img .* ([^ \\]+) ?\\/, "![Embedded image][\\1]")
+    
+    # Other Plugins
+    content.gsub!(/\\red (.+) ?\\/, "**\\1**")
+    content.gsub!(/\\youtube (.*) ?\\/, "[Youtube link][\\1]")
+    content.gsub!(/\\osm ([^ ]+) ([^ ]+) ?\\/, "[Open Street Map link][http://www.openstreetmap.org/?lat=\\1&lon=\\2&zoom=18&layers=M]")
+
+    # Delete the useless stuff
+    content.gsub!(/\\index.+\\/, "")
+    content.gsub!(/\\recentchanges.+\\/, "")
+
+
+    File.write
   end
 
 end
