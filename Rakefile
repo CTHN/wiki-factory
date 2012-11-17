@@ -6,6 +6,21 @@ end
 desc "Generate HTML stuff from markdown"
 task :generate do
   require "kramdown"
-  puts Kramdown::Document.new("*test*").to_html # .to_latex
+  require "fileutils"
+
+  import_folder = "import_results"
+  target_folder = "public_html"
+
+  #Dir.mkdir(target_folder)
+  FileUtils.rm_rf(target_folder) if Dir.exists?(target_folder)
+  Dir.mkdir(target_folder)
+  FileUtils.cp_r(File.join(import_folder, "images"), target_folder)
+
+  Dir.glob("#{import_folder}/*.mkd").each do |file|
+    content = Kramdown::Document.new(File.new(file, "r").read).to_html
+    File.open(File.join(target_folder, File.basename(file)[0..-4] + "html"), "w") do |fh|
+      fh.write(content)
+    end
+  end
 end
 
