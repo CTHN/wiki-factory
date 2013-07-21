@@ -29,7 +29,8 @@ Dir.glob('wiki-data/pages/**/*').each do |file|
 
   # Markdown files gets converted to HTML
   next unless File.extname(file) == '.mkd'
-  document = Kramdown::Document.new(File.read(file), :input => 'markdown')
+  content = File.read(file).force_encoding("UTF-8").encode("UTF-8", :replace => nil)
+  document = Kramdown::Document.new(content, :input => 'markdown')
   File.open("#{basepath}/public_html/pages/#{file_relative[0..-5]}.html", 'w') do |f|
     f.write(document.to_html)
   end
