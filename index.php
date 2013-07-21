@@ -5,12 +5,12 @@ function active_page() {
     return 'mainpage';
 }
 
-function content($name) {
-    $filename = "content/pages/{$name}";
+function public_html($name) {
+    $filename = "public_html/pages/{$name}";
     $ext = file_exists("{$filename}.html.php") ? 'html.php' : 'html';
-    if (!file_exists("{$filename}.{$ext}")) include('content/pages/error_404.html');
+    if (!file_exists("{$filename}.{$ext}")) include('public_html/pages/error_404.html');
     include("{$filename}.{$ext}");
 }
 
 // Go for it!
-include('content/pages/layout.html.php');
+include('public_html/pages/layout.html.php');
