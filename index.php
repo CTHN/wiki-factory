@@ -5,7 +5,7 @@ function active_page() {
     return 'mainpage';
 }
 
-function public_html($name) {
+function content($name) {
     $filename = "public_html/pages/{$name}";
     $ext = file_exists("{$filename}.html.php") ? 'html.php' : 'html';
     if (!file_exists("{$filename}.{$ext}")) include('public_html/pages/error_404.html');
