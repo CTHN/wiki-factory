@@ -1,7 +1,7 @@
 <?php
 
 function active_page() {
-    if (!empty($_GET['page'])) return trim(preg_replace('/[^a-zA-Z0-9\/]+/', '', $_GET['page']));
+    if (!empty($_GET['page'])) return trim(preg_replace('/[^a-zA-Z0-9\/-_]+/', '', $_GET['page']));
     return 'mainpage';
 }
 
